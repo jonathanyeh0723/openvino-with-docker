@@ -103,7 +103,7 @@ REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
 dockerflamejc/advanipc    v1        c830995236f5   27 minutes ago   6.03GB
 ```
 
-For more information about building and running the image, refer to `https://github.com/openvinotoolkit/docker_ci`.
+For more information about building and running the image, refer to https://github.com/openvinotoolkit/docker_ci.
 
 ## Test
 
