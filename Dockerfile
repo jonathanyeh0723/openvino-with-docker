@@ -357,6 +357,10 @@ WORKDIR ${INTEL_OPENVINO_DIR}
 RUN apt-get update && \
     apt-get install curl vim git -y
 
+RUN apt-get update && \
+    apt-get install libcanberra-gtk-module libcanberra-gtk3-module -y
+
+
 # Install matplotlib
 ENV PYTHON_VER python3.10
 RUN ${PYTHON_VER} -m pip install matplotlib
@@ -365,10 +369,12 @@ RUN ${PYTHON_VER} -m pip install pyqt5
 # Clone Open Model Zoo
 RUN git clone --recurse-submodules https://github.com/openvinotoolkit/open_model_zoo.git
 
-# 
+WORKDIR /home/openvino/lab
+COPY lab .
+
+# USER OpenVINO home directory 
 ENV USER_OPENVINO_DIR=/home/openvino
 WORKDIR ${USER_OPENVINO_DIR}
-COPY lab . 
 
 ENV DEBIAN_FRONTEND=noninteractive
 

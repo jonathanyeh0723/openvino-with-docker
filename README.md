@@ -105,11 +105,16 @@ dockerflamejc/advanipc    v1        c830995236f5   27 minutes ago   6.03GB
 
 For more information about building and running the image, refer to https://github.com/openvinotoolkit/docker_ci.
 
-## Test
+## Run
+
+To directly use the latest image built from Docker Hub, run:
+```
+docker image pull dockerflamejc/advanipc:latest
+```
 
 Default run the container with interactive mode:
 ```
-docker run --interactive --tty dockerflamejc/advanipc:v1
+docker run --interactive --tty dockerflamejc/advanipc:latest
 ```
 
 Note currently only the `CPU` plugin is available, we can check by running `python3` with following command:
@@ -148,12 +153,29 @@ GPU Intel(R) Iris(R) Xe Graphics (iGPU)
 Now the `GPU` is ready for inference.
 
 In real-world practical use cases, it's more convenient to add volume for easier data usage and webcam for live streaming. For example:<br>
-- Bind the local `/home/<user>/Downloads` directory to `/mnt` the container directory: `--volume /home/cnai/Downloads:/mnt`
+- Bind the local `/home/<user>/Downloads` directory to `/mnt` the container directory: `--volume ~/Downloads:/mnt`
 - Link the USB video camera: `--device /dev/video0:/dev/video0`
 
 Putting all together:
 ```
-docker run --interactive --tty --device /dev/dri:/dev/dri --volume /home/cnai/Downloads:/mnt --device /dev/video0:/dev/video0 dockerflamejc/advanipc:v1
+docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt --device /dev/video0:/dev/video0 dockerflamejc/advanipc:v1
+```
+
+### Test for more labs
+- Classification:
+
+- Object Detection:
+```
+docker run -it --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --rm dockerflamejc/advanipc:latest
+```
+
+If you run inference for object detection tasks, while showing the results encountering warning message like below:
+```
+(python3:87): dbind-WARNING **: 07:06:46.828: Couldn't connect to accessibility bus: Failed to connect to socket /run/user/1000/at-spi/bus_1: No such file or directory
+```
+you could try the following to suppress the errors:
+```
+export NO_AT_BRIDGE=1
 ```
 
 ## References
