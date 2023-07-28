@@ -162,12 +162,36 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
 ```
 
 ### Test for more labs
-- Classification:
+```
+.
+├── 0_devices_check.py
+├── 1_classification.py
+├── 2_object_detection.py
+├── coco_91cl_bkgr.txt
+├── imagenet_2015.txt
+├── neymar.jpg
+└── public
+    ├── googlenet-v2
+    │   └── FP16
+    │       ├── googlenet-v2.bin
+    │       └── googlenet-v2.xml
+    └── ssdlite_mobilenet_v2
+        └── FP16
+            ├── ssdlite_mobilenet_v2.bin
+            └── ssdlite_mobilenet_v2.xml
 
-- Object Detection:
+5 directories, 10 files
+```
+
+To play more ambitious labs, you'll have to run the container with verbose arguments:
 ```
 docker run -it --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --rm dockerflamejc/advanipc:latest
 ```
+
+Inside the container, go to the `lab` directory.<br>
+- Classification: `python3 1_classification.py`
+
+- Object Detection: `2_object_detection.py`
 
 If you run inference for object detection tasks, while showing the results encountering warning message like below:
 ```
