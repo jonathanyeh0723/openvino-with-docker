@@ -34,6 +34,6 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64
-          build-args: package_url=https://storage.openvinotoolkit.org/repositories/openvino/packages/2023.0/linux/l_openvino_toolkit_ubuntu20_2023.0.0.10926.b4452d56304_x86_64.tgz
+          build-args: package_url=${{ secrets.PACKAGE_URL }}
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_NAME }}:latest
