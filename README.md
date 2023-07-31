@@ -7,6 +7,8 @@
 
 In a nutshell, using containers could be more streamlined to build, test, and deploy the applications on multiple environments, from a developer’s local laptop to an on-premises data center and even the cloud.
 
+![architecture](./resources/ov_docker_architecture.png)
+
 ## Build
 
 Hierarchy
