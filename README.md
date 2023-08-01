@@ -11,31 +11,18 @@ In a nutshell, using containers could be more streamlined to build, test, and de
 
 ## Build
 
-Hierarchy
-```
-.
-├── Dockerfile
-├── lab
-│   ├── 0_devices_check.py
-│   ├── 1_classification.py
-│   ├── imagenet_2015.txt
-│   ├── neymar.jpg
-│   └── public
-│       └── googlenet-v2
-│           └── FP16
-│               ├── googlenet-v2.bin
-│               └── googlenet-v2.xml
-├── LICENSE
-├── README.md
-└── third-party-programs-docker-dev.txt
-```
-
 To build the image, run
 ```
 docker build . --build-arg package_url=https://storage.openvinotoolkit.org/repositories/openvino/packages/2023.0/linux/l_openvino_toolkit_ubuntu20_2023.0.0.10926.b4452d56304_x86_64.tgz -t dockerflamejc/advanipc:v1 --no-cache
 ```
 
-Reference logs:
+The above commands would build an image from a Dockerfile:<br>
+- `docker build .`: This is the default option to look for a Dockerfile at the root of the build context.<br>
+- `--build-arg`: Set the build-time variables, in this case is `package_url`. It points to the OpenVINO dev packages directly from [public storage](https://storage.openvinotoolkit.org/repositories/openvino/packages/).<br>
+- `-t`: Name and optionally a tag in the name:tag format for easier identify our image.<br>
+- `--no-cache`: For sake of hardened microservice security, not to use cache when building the image.
+
+Reference of successful build logs:
 ```
 [+] Building 1194.8s (53/53) FINISHED                                                                                                                         
  => [internal] load build definition from Dockerfile                                                                                                     0.0s
@@ -169,9 +156,18 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
 ├── 0_devices_check.py
 ├── 1_classification.py
 ├── 2_object_detection.py
-├── coco_91cl_bkgr.txt
-├── imagenet_2015.txt
-├── neymar.jpg
+├── 3_segmentation.py
+├── images
+│   ├── empty_road_mapillary.jpg
+│   └── neymar.jpg
+├── intel
+│   └── road-segmentation-adas-0001
+│       └── FP16
+│           ├── road-segmentation-adas-0001.bin
+│           └── road-segmentation-adas-0001.xml
+├── labels
+│   ├── coco_91cl_bkgr.txt
+│   └── imagenet_2015.txt
 └── public
     ├── googlenet-v2
     │   └── FP16
@@ -182,7 +178,7 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
             ├── ssdlite_mobilenet_v2.bin
             └── ssdlite_mobilenet_v2.xml
 
-5 directories, 10 files
+10 directories, 14 files
 ```
 
 To play more ambitious labs, you'll have to run the container with verbose arguments:
@@ -191,11 +187,13 @@ docker run -it --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt -e DISPLAY=$
 ```
 
 Inside the container, go to the `lab` directory.<br>
-- Classification: `python3 1_classification.py`
+- Classification: `1_classification.py`
 
 - Object Detection: `2_object_detection.py`
 
-If you run inference for object detection tasks, while showing the results encountering warning message like below:
+- Segmentation: `3_segmentation.py`
+
+If you run inference for some tasks, while showing the results encountering warning message like below:
 ```
 (python3:87): dbind-WARNING **: 07:06:46.828: Couldn't connect to accessibility bus: Failed to connect to socket /run/user/1000/at-spi/bus_1: No such file or directory
 ```

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 classes = []
-with open('coco_91cl_bkgr.txt', 'r') as f:
+with open('labels/coco_91cl_bkgr.txt', 'r') as f:
     labels_list = (f.readlines())
     for i in labels_list:
         i = i.strip()
@@ -17,7 +17,7 @@ compiled_model = core.compile_model(model, 'AUTO')
 input_layers = compiled_model.input(0)
 b, h, w, c = input_layers.shape
 
-image = cv2.imread('neymar.jpg')
+image = cv2.imread('images/neymar.jpg')
 image_h, image_w, image_c = image.shape
 resized = cv2.resize(image, (w, h))
 input_tensor = np.expand_dims(resized, axis=0)
