@@ -71,8 +71,6 @@ infer_request = compiled_model.create_infer_request()
 results = infer_request.infer({0: input_tensor})
 
 segmentation_mask = np.argmax(results[output_layer], axis=1)
-#plt.imshow(segmentation_mask.transpose(1, 2, 0))
-#plt.show()
 
 # Define colormap, each color represents a class.
 colormap = np.array([[68, 1, 84], [48, 103, 141], [53, 183, 120], [199, 216, 52]])
