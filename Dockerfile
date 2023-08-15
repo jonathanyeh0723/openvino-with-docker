@@ -369,6 +369,10 @@ RUN ${PYTHON_VER} -m pip install pyqt5
 # Clone Open Model Zoo
 RUN git clone --recurse-submodules https://github.com/openvinotoolkit/open_model_zoo.git
 
+WORKDIR /opt/intel/openvino_2023/open_model_zoo/demos/object_detection_demo/python
+COPY resources/object_detection_demo.py . 
+COPY resources/highway_car.mp4 .
+
 WORKDIR /home/openvino/lab
 COPY lab .
 
