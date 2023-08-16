@@ -360,6 +360,8 @@ RUN apt-get update && \
 RUN apt-get update && \
     apt-get install libcanberra-gtk-module libcanberra-gtk3-module -y
 
+RUN apt-get update && \
+    apt-get install '^libxcb.*-dev' libx11-xcb-dev libglu1-mesa-dev libxrender-dev libxi-dev libxkbcommon-dev libxkbcommon-x11-dev -y
 
 # Install matplotlib
 ENV PYTHON_VER python3.10

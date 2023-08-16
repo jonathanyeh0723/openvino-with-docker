@@ -157,6 +157,8 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
 ├── 1_classification.py
 ├── 2_object_detection.py
 ├── 3_segmentation.py
+├── demo_object_detection_camera.sh
+├── demo_object_detection_video.sh
 ├── images
 │   ├── empty_road_mapillary.jpg
 │   └── neymar.jpg
@@ -166,6 +168,7 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
 │           ├── road-segmentation-adas-0001.bin
 │           └── road-segmentation-adas-0001.xml
 ├── labels
+│   ├── coco_80cl.txt
 │   ├── coco_91cl_bkgr.txt
 │   └── imagenet_2015.txt
 └── public
@@ -178,7 +181,7 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
             ├── ssdlite_mobilenet_v2.bin
             └── ssdlite_mobilenet_v2.xml
 
-10 directories, 14 files
+10 directories, 17 files
 ```
 
 To play more ambitious labs, you'll have to run the container with verbose arguments:
