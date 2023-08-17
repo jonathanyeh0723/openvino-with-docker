@@ -36,6 +36,10 @@ def main():
     for i in range(5):
         print(idx[i], str(round(probs[0][idx[i]]*100))+"%", labels[idx[i]])
 
+    cv2.imshow('Classification', image)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
-if __name__ =="__main__":
+
+if __name__ == "__main__":
     main()

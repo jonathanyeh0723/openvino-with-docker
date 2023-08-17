@@ -22,6 +22,7 @@ def main():
     b, h, w, c = input_layers.shape
 
     image = cv2.imread('images/neymar.jpg')
+    original = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     image_h, image_w, image_c = image.shape
     resized = cv2.resize(image, (w, h))
     input_tensor = np.expand_dims(resized, axis=0)
@@ -38,15 +39,23 @@ def main():
                 ymin = int(obj[4] * image_h)
                 xmax = int(obj[5] * image_w)
                 ymax = int(obj[6] * image_h)
-                cv2.rectangle(image, (xmin, ymin), (xmax, ymax),
-                              (0, 255, 0), 3)
-                cv2.putText(image, f"{classes[label]}: {conf:.2f}",
+                drew_image = cv2.rectangle(image, (xmin, ymin), (xmax, ymax),
+                                           (0, 255, 0), 3)
+                cv2.putText(drew_image, f"{classes[label]}: {conf:.2f}",
                             (xmin+10, ymin+25), cv2.FONT_HERSHEY_COMPLEX,
                             image.shape[1]/1000*1.5, (0, 255, 0), 2,
                             lineType=cv2.LINE_AA)
 
-    cv2.imshow('demo - object detection', image)
-    cv2.waitKey(0)
+    shown = cv2.cvtColor(drew_image, cv2.COLOR_BGR2RGB)
+    data = {"Original Photo": original, "Inferenced Photo": shown}
+    fig, axs = plt.subplots(1, len(data.items()), figsize=(12, 8))
+
+    for ax, (name, image) in zip(axs, data.items()):
+        ax.axis('off')
+        ax.set_title(name)
+        ax.imshow(image)
+
+    plt.show()
 
 
 if __name__ == "__main__":
