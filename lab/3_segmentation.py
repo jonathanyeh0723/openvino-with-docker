@@ -85,5 +85,12 @@ resized_mask = cv2.resize(mask, (image_w, image_h))
 # Create an image with mask.
 image_with_mask = cv2.addWeighted(resized_mask, alpha, rgb_image, 1 - alpha, 0)
 
-plt.imshow(image_with_mask)
+# Data visualization pipeline
+data = {"Original": rgb_image, "Segmentation": mask, "Masked": image_with_mask}
+fig, axs = plt.subplots(1, len(data.items()), figsize=(15, 7))
+for ax, (name, image) in zip(axs, data.items()):
+    ax.axis("Off")
+    ax.set_title(name)
+    ax.imshow(image)
+
 plt.show()

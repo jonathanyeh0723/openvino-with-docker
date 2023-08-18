@@ -190,11 +190,29 @@ docker run -it --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt -e DISPLAY=$
 ```
 
 Inside the container, go to the `lab` directory.<br>
-- Classification: `1_classification.py`
+- Classification: `1_classification.py`<br>
+To run classification:
+```
+python3 1_classification.py
+```
 
-- Object Detection: `2_object_detection.py`
+![lab_1_result](lab/inferenced/1.png)
 
-- Segmentation: `3_segmentation.py`
+- Object Detection: `2_object_detection.py`<br>
+To run object detection:
+```
+python3 2_object_detection.py
+```
+
+![lab_2_result](lab/inferenced/2.png)
+
+- Segmentation: `3_segmentation.py`<br>
+To run segmentation:
+```
+python3 3_segmentation.py
+```
+
+![lab_3_result](lab/inferenced/3.png)
 
 If you run inference for some tasks, while showing the results encountering warning message like below:
 ```
