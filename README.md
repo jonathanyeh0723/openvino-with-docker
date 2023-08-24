@@ -152,7 +152,7 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
 
 ### Test for more labs
 ```
-.
+lab/
 ├── 0_devices_check.py
 ├── 1_classification.py
 ├── 2_object_detection.py
@@ -162,6 +162,10 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
 ├── images
 │   ├── empty_road_mapillary.jpg
 │   └── neymar.jpg
+├── inferenced
+│   ├── 1.png
+│   ├── 2.png
+│   └── 3.png
 ├── intel
 │   └── road-segmentation-adas-0001
 │       └── FP16
@@ -181,7 +185,7 @@ docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/
             ├── ssdlite_mobilenet_v2.bin
             └── ssdlite_mobilenet_v2.xml
 
-10 directories, 17 files
+11 directories, 20 files
 ```
 
 To play more ambitious labs, you'll have to run the container with verbose arguments:
@@ -213,6 +217,10 @@ python3 3_segmentation.py
 ```
 
 ![lab_3_result](lab/inferenced/3.png)
+
+- Object Detection: <br>
+
+![object_detection_plot](resources/what_was_i_made_for.png)
 
 If you run inference for some tasks, while showing the results encountering warning message like below:
 ```
