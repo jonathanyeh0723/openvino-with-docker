@@ -11,6 +11,21 @@ In a nutshell, using containers could be more streamlined to build, test, and de
 
 ## Build
 
+First, you will need [git](https://git-scm.com/) to clone this repository to your local computer. If you’re using Linux system like Ubuntu, you can simply do this by:
+```
+sudo apt-get install git
+```
+
+Next, clone the repo:
+```
+git clone https://github.com/jonathanyeh0723/openvino-with-docker
+```
+
+After that, go to the main folder with Dockerfile inside:
+```
+cd openvino-with-docker/
+```
+
 To build the image, run
 ```
 docker build . --build-arg package_url=https://storage.openvinotoolkit.org/repositories/openvino/packages/2023.0/linux/l_openvino_toolkit_ubuntu20_2023.0.0.10926.b4452d56304_x86_64.tgz -t dockerflamejc/advanipc:v1 --no-cache
