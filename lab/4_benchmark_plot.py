@@ -17,30 +17,36 @@ models = ['public/googlenet-v2/FP16/googlenet-v2.xml',
           'public/ssdlite_mobilenet_v2/FP16/ssdlite_mobilenet_v2.xml',
           'intel/road-segmentation-adas-0001/FP16/road-segmentation-adas-0001.xml']
 
-try:
-    if 'CPU' and 'GPU' in devices:
-        for model in models:
-            subprocess.call([f"benchmark_app -m {model} -d CPU > rich_test_data.txt"], shell=True)
-            subprocess.call(["cat rich_test_data.txt | grep Throughput >> benchmark_result_cpu.txt"], shell=True)
-            subprocess.call([f"benchmark_app -m {model} -d GPU > rich_test_data.txt"], shell=True)
-            subprocess.call(["cat rich_test_data.txt | grep Throughput >> benchmark_result_gpu.txt"], shell=True)
-except Exception:
-    print("Not found iGPU plugin. It seemed configuration is not correct!")
-
 np.random.seed(19680801)
 
 cpu_performance = []
 gpu_performance = []
 
-for txt in ('benchmark_result_cpu.txt', 'benchmark_result_gpu.txt'):
-    with open(txt) as f:
+if 'CPU' and 'GPU' in devices:
+    for model in models:
+        subprocess.call([f"benchmark_app -m {model} -d CPU > rich_test_data.txt"], shell=True)
+        subprocess.call(["cat rich_test_data.txt | grep Throughput >> benchmark_result_cpu.txt"], shell=True)
+        subprocess.call([f"benchmark_app -m {model} -d GPU > rich_test_data.txt"], shell=True)
+        subprocess.call(["cat rich_test_data.txt | grep Throughput >> benchmark_result_gpu.txt"], shell=True)
+
+    for txt in ('benchmark_result_cpu.txt', 'benchmark_result_gpu.txt'):
+        with open(txt) as f:
+            result = f.readlines()
+            for x in result:
+                element = float(x.split(':')[-1].strip('\n').strip('FPS').strip(' '))
+                if txt == 'benchmark_result_cpu.txt':
+                    cpu_performance.append(element)
+                else:
+                    gpu_performance.append(element)
+else:
+    for model in models:
+        subprocess.call([f"benchmark_app -m {model} -d CPU > rich_test_data.txt"], shell=True)
+        subprocess.call(["cat rich_test_data.txt | grep Throughput >> benchmark_result_cpu.txt"], shell=True)
+    with open('benchmark_result_cpu.txt') as f:
         result = f.readlines()
         for x in result:
             element = float(x.split(':')[-1].strip('\n').strip('FPS').strip(' '))
-            if txt == 'benchmark_result_cpu.txt':
-                cpu_performance.append(element)
-            else:
-                gpu_performance.append(element)
+            cpu_performance.append(element)
 
 labels = ["googlenet-v2", "ssdlite_mobilenet_v2", "road-segmentation\n-adas-0001"]
 
@@ -48,8 +54,6 @@ x = np.arange(len(labels))  # the label locations
 width = 0.35  # the width of the bars
 
 fig, ax = plt.subplots()
-rects1 = ax.bar(x - width/2, cpu_performance, width, label='CPU')
-rects2 = ax.bar(x + width/2, gpu_performance, width, label='GPU')
 
 ax.set_ylabel('Throughput (FPS)')
 ax.set_title('Benchmark Performance Test Results')
@@ -57,8 +61,13 @@ ax.set_xticks(x)
 ax.set_xticklabels(labels)
 ax.legend()
 
-ax.bar_label(rects1, padding=3)
-ax.bar_label(rects2, padding=3)
+if 'CPU' and 'GPU' in devices:
+    rects1 = ax.bar(x - width/2, cpu_performance, width, label='CPU')
+    rects2 = ax.bar(x + width/2, gpu_performance, width, label='GPU')
+    ax.bar_label(rects1, padding=3)
+    ax.bar_label(rects2, padding=3)
+else:
+    ax.bar(x, cpu_performance, width, label='CPU')
 
 fig.tight_layout()
 plt.show()
