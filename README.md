@@ -233,6 +233,21 @@ python3 3_segmentation.py
 
 ![lab_3_result](lab/inferenced/3.png)
 
+- Benchmark Performance Test Result Visualization: `4_benchmark_plot.py`<br>
+To quickly check the platform plugins AI computing capability we used, run:
+```
+python3 4_benchmark_plot.py
+```
+You would need to wait for a couple of minutes for the testing.
+```
+[ INFO ] Found CPU plugin: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+[ INFO ] Found GNA plugin: GNA_SW
+[ INFO ] Found GPU plugin: Intel(R) Iris(R) Xe Graphics (iGPU)
+Starting to perform benchmark performance visualization...
+```
+
+![lab_4-1_result](lab/plot/benchmark_plot_cpu_gpu.png)
+
 - Object Detection: <br>
 
 ![object_detection_plot](resources/what_was_i_made_for.png)
