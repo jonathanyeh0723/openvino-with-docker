@@ -248,6 +248,20 @@ Starting to perform benchmark performance visualization...
 
 ![lab_4-1_result](lab/plot/benchmark_plot_cpu_gpu.png)
 
+In addition, in case of integrated graphic card is not successfully activated (this usually due to the use of unverified Linux Kernel version, missing some Docker run command arguments, or in [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) environment not performing post configuration), the plot script also can also handle situation of CPU plugin scenario only.
+
+```
+python3 4_benchmark_plot.py
+```
+In such case, You would **not** see the *GPU plugin found* message reflected from the console.  
+```
+[ INFO ] Found CPU plugin: 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz
+[ INFO ] Found GNA plugin: GNA_SW
+Starting to perform benchmark performance visualization...
+```
+
+![lab_4-2_result](lab/plot/benchmark_plot_cpu.png)
+
 - Object Detection: <br>
 
 ![object_detection_plot](resources/what_was_i_made_for.png)
