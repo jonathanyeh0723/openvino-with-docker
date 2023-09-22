@@ -21,8 +21,8 @@ with open ('docker_images.txt', mode='r') as f:
 
 print("Total docker images size downloaded:")
 print(str(image_size_gb_total) + "GB, ",
-        str(image_size_mb_total) + "MB, ",
-        str(image_size_kb_total) + "kB")
+      str(image_size_mb_total) + "MB, ",
+      str(image_size_kb_total) + "kB")
 
 subprocess.call(["rm docker_images.txt"], shell=True)
 
