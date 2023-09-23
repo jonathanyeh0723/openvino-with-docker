@@ -25,4 +25,3 @@ print(str(image_size_gb_total) + "GB, ",
       str(image_size_kb_total) + "kB")
 
 subprocess.call(["rm docker_images.txt"], shell=True)
-
