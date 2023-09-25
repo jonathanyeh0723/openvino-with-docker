@@ -28,7 +28,7 @@ cd openvino-with-docker/
 
 To build the image, run
 ```
-docker build . --build-arg package_url=https://storage.openvinotoolkit.org/repositories/openvino/packages/2023.0/linux/l_openvino_toolkit_ubuntu20_2023.0.0.10926.b4452d56304_x86_64.tgz -t dockerflamejc/advanipc:v1 --no-cache
+docker build . --build-arg package_url=https://storage.openvinotoolkit.org/repositories/openvino/packages/2023.0/linux/l_openvino_toolkit_ubuntu20_2023.0.0.10926.b4452d56304_x86_64.tgz -t dockerflamejc/advanipc:latest --no-cache
 ```
 
 The above commands would build an image from a Dockerfile:<br>
@@ -98,13 +98,13 @@ Reference of successful build logs:
  => exporting to image                                                                                                                                  13.1s
  => => exporting layers                                                                                                                                 13.1s
  => => writing image sha256:c830995236f5160d2e57375575fe541e898cb782fc676c778a7fe6ea340d9fb5                                                             0.0s
- => => naming to docker.io/dockerflamejc/advanipc:v1                        
+ => => naming to docker.io/dockerflamejc/advanipc:latest                        
 ```
 
 Checking the image built by running `docker image ls`
 ```
-REPOSITORY                TAG       IMAGE ID       CREATED          SIZE
-dockerflamejc/advanipc    v1        c830995236f5   27 minutes ago   6.03GB
+REPOSITORY                TAG           IMAGE ID       CREATED          SIZE
+dockerflamejc/advanipc    latest        c830995236f5   27 minutes ago   6.21GB
 ```
 
 For more information about building and running the image, refer to https://github.com/openvinotoolkit/docker_ci.
@@ -134,7 +134,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 To use `GPU` accelerator, we need to add the argument `--device /dev/dri:/dev/dri` like this:
 ```
-docker run --interactive --tty --device /dev/dri:/dev/dri dockerflamejc/advanipc:v1
+docker run --interactive --tty --device /dev/dri:/dev/dri dockerflamejc/advanipc:latest
 ```
 
 Inside the container, running `python3` again for plugins confirmation:
@@ -162,7 +162,7 @@ In real-world practical use cases, it's more convenient to add volume for easier
 
 Putting all together:
 ```
-docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt --device /dev/video0:/dev/video0 dockerflamejc/advanipc:v1
+docker run --interactive --tty --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt --device /dev/video0:/dev/video0 dockerflamejc/advanipc:latest
 ```
 
 ### Test for more labs
@@ -273,6 +273,75 @@ If you run inference for some tasks, while showing the results encountering warn
 you could try the following to suppress the errors:
 ```
 export NO_AT_BRIDGE=1
+```
+
+## Add-ons
+Once you have completed validation of this development kit environment, and would like to further deploy to other computer for easier use in the future, you could either push the image to your own Docker Hub repository, or save it as a tar file. 
+
+- Push to Docker Hub:
+
+- Save as a tar file:
+First, check the image built by running `docker image ls dockerflamejc/advanipc:v3`, this would output:
+```
+REPOSITORY               TAG       IMAGE ID       CREATED      SIZE
+dockerflamejc/advanipc   v3        f7103e24dce6   2 days ago   6.21GB
+```
+
+And then, refer to [docker_save](https://docs.docker.com/engine/reference/commandline/save/) to save the image using the following command:
+```
+docker save dockerflamejc/advanipc:v3 | gzip > sertek_advanipc_ov.tar.gz
+```
+
+Run a simple `ls -lh sertek_advanipc_ov.tar.gz` command for a quick check:
+```
+-rw-rw-r-- 1 cnai cnai 2.4G  九  25 17:36 sertek_advanipc_ov.tar.gz
+```
+
+That's it! Now you have successfully saved the image as a tarball. You could upload to the cloud or copy the a portable USB flash drive.<br>
+To load the image, run:
+```
+docker load -i sertek_advanipc_ov.tar.gz
+```
+
+You should be able to see the logs like below, if successful:
+```
+532a9e69ce55: Loading layer    361kB/361kB
+88c886a6fdeb: Loading layer  2.048kB/2.048kB
+4dcbdb025d2d: Loading layer  153.2MB/153.2MB
+342bba5ea7f5: Loading layer  1.536kB/1.536kB
+c4e12dc6b5a5: Loading layer  9.223MB/9.223MB
+7170ab2b6f38: Loading layer  3.918MB/3.918MB
+813104224a67: Loading layer  393.8MB/393.8MB
+f79a6a9a5b55: Loading layer  8.042MB/8.042MB
+aa3238681423: Loading layer  3.072kB/3.072kB
+f4d1822cc2ca: Loading layer  4.096kB/4.096kB
+b015902227d0: Loading layer  14.97MB/14.97MB
+5f70bf18a086: Loading layer  1.024kB/1.024kB
+3d24ba73c100: Loading layer  3.229GB/3.229GB
+5f70bf18a086: Loading layer  1.024kB/1.024kB
+6c06b8b1e6d3: Loading layer     97MB/97MB
+5614dbf5b451: Loading layer  4.608kB/4.608kB
+62e8a5656271: Loading layer  2.381MB/2.381MB
+c48ac245ca44: Loading layer  934.1MB/934.1MB
+92d47d0bff7d: Loading layer  4.548MB/4.548MB
+f1fb8063955c: Loading layer  548.4kB/548.4kB
+9f0b0a489444: Loading layer  46.08kB/46.08kB
+3c96639e990a: Loading layer  229.7MB/229.7MB
+6b7de6ee3077: Loading layer   7.68kB/7.68kB
+25cf3b35b323: Loading layer  84.46MB/84.46MB
+1cff203fb751: Loading layer  13.45MB/13.45MB
+040166aae8be: Loading layer  17.23MB/17.23MB
+6fa2b657a20a: Loading layer  89.78MB/89.78MB
+7c1ef7228757: Loading layer  275.1MB/275.1MB
+23cc2a44ee1e: Loading layer  482.7MB/482.7MB
+2b195700c1a4: Loading layer  22.02kB/22.02kB
+82cd5a8078bc: Loading layer  3.958MB/3.958MB
+cd3f1b595ac3: Loading layer   2.56kB/2.56kB
+e9257f557c34: Loading layer  34.61MB/34.61MB
+4b56c869dd40: Loading layer   2.56kB/2.56kB
+845e284721d7: Loading layer  22.64MB/22.64MB
+28ff8a20904e: Loading layer  114.5MB/114.5MB
+Loaded image: dockerflamejc/advanipc:v3
 ```
 
 ## References
