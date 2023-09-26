@@ -278,9 +278,26 @@ export NO_AT_BRIDGE=1
 ## Add-ons
 Once you have completed validation of this development kit environment, and would like to further deploy to other computer for easier use in the future, you could either push the image to your own Docker Hub repository, or save it as a tar file. 
 
-- Push to Docker Hub:
+- **Push to Docker Hub**:
 
-- Save as a tar file:
+Refer to [docker_push](https://docs.docker.com/engine/reference/commandline/push/), once you have created your own account and repository on the Docker Hub, you could simply push the image built to the desired location by running `docker push <dockerhub_account>/<repo_name>:<tag>`
+
+```
+docker push dockerflamejc/advanipc:latest
+```
+
+You should be able to see the logs like below, if successful:
+
+```
+The push refers to repository [docker.io/dockerflamejc/advanipc]
+5f70bf18a086: Preparing 
+...
+2db60c1b32cb: Layer already exists 
+dc0585a4b8b7: Layer already exists 
+latest: digest: sha256:da119027d0b33a4aa5752a23052b57a3547c2e2da6fcd6bb48ff08bc4dcae66e size: 8493
+```
+
+- **Save as a tar file**:
 First, check the image built by running `docker image ls dockerflamejc/advanipc:v3`, this would output:
 ```
 REPOSITORY               TAG       IMAGE ID       CREATED      SIZE
@@ -305,39 +322,7 @@ docker load -i sertek_advanipc_ov.tar.gz
 
 You should be able to see the logs like below, if successful:
 ```
-532a9e69ce55: Loading layer    361kB/361kB
-88c886a6fdeb: Loading layer  2.048kB/2.048kB
-4dcbdb025d2d: Loading layer  153.2MB/153.2MB
-342bba5ea7f5: Loading layer  1.536kB/1.536kB
-c4e12dc6b5a5: Loading layer  9.223MB/9.223MB
-7170ab2b6f38: Loading layer  3.918MB/3.918MB
-813104224a67: Loading layer  393.8MB/393.8MB
-f79a6a9a5b55: Loading layer  8.042MB/8.042MB
-aa3238681423: Loading layer  3.072kB/3.072kB
-f4d1822cc2ca: Loading layer  4.096kB/4.096kB
-b015902227d0: Loading layer  14.97MB/14.97MB
-5f70bf18a086: Loading layer  1.024kB/1.024kB
-3d24ba73c100: Loading layer  3.229GB/3.229GB
-5f70bf18a086: Loading layer  1.024kB/1.024kB
-6c06b8b1e6d3: Loading layer     97MB/97MB
-5614dbf5b451: Loading layer  4.608kB/4.608kB
-62e8a5656271: Loading layer  2.381MB/2.381MB
-c48ac245ca44: Loading layer  934.1MB/934.1MB
-92d47d0bff7d: Loading layer  4.548MB/4.548MB
-f1fb8063955c: Loading layer  548.4kB/548.4kB
-9f0b0a489444: Loading layer  46.08kB/46.08kB
-3c96639e990a: Loading layer  229.7MB/229.7MB
-6b7de6ee3077: Loading layer   7.68kB/7.68kB
-25cf3b35b323: Loading layer  84.46MB/84.46MB
-1cff203fb751: Loading layer  13.45MB/13.45MB
-040166aae8be: Loading layer  17.23MB/17.23MB
-6fa2b657a20a: Loading layer  89.78MB/89.78MB
-7c1ef7228757: Loading layer  275.1MB/275.1MB
-23cc2a44ee1e: Loading layer  482.7MB/482.7MB
-2b195700c1a4: Loading layer  22.02kB/22.02kB
-82cd5a8078bc: Loading layer  3.958MB/3.958MB
-cd3f1b595ac3: Loading layer   2.56kB/2.56kB
-e9257f557c34: Loading layer  34.61MB/34.61MB
+...
 4b56c869dd40: Loading layer   2.56kB/2.56kB
 845e284721d7: Loading layer  22.64MB/22.64MB
 28ff8a20904e: Loading layer  114.5MB/114.5MB
