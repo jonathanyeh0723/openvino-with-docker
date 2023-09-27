@@ -276,11 +276,13 @@ export NO_AT_BRIDGE=1
 ```
 
 ## Add-ons
+
+### Store the image 
 Once you have completed validation of this development kit environment, and would like to further deploy to other computer for easier use in the future, you could either push the image to your own Docker Hub repository, or save it as a tar file. 
 
 - **Push to Docker Hub**:
 
-Refer to [docker_push](https://docs.docker.com/engine/reference/commandline/push/), once you have created your own account and repository on the Docker Hub, you could simply push the image built to the desired location by running `docker push <dockerhub_account>/<repo_name>:<tag>`
+Refer to [docker push](https://docs.docker.com/engine/reference/commandline/push/), once you have created your own account and repository on the Docker Hub, you could simply push the image built to the desired location by running `docker push <dockerhub_account>/<repo_name>:<tag>`
 
 ```
 docker push dockerflamejc/advanipc:latest
@@ -304,7 +306,7 @@ REPOSITORY               TAG       IMAGE ID       CREATED      SIZE
 dockerflamejc/advanipc   v3        f7103e24dce6   2 days ago   6.21GB
 ```
 
-And then, refer to [docker_save](https://docs.docker.com/engine/reference/commandline/save/) to save the image using the following command:
+And then, refer to [docker save](https://docs.docker.com/engine/reference/commandline/save/) to save the image using the following command:
 ```
 docker save dockerflamejc/advanipc:v3 | gzip > sertek_advanipc_ov.tar.gz
 ```
@@ -327,6 +329,31 @@ You should be able to see the logs like below, if successful:
 845e284721d7: Loading layer  22.64MB/22.64MB
 28ff8a20904e: Loading layer  114.5MB/114.5MB
 Loaded image: dockerflamejc/advanipc:v3
+```
+
+### Useful tools
+If you download or built various images, you want to count the total size of the images so that you can better manage your own space. You could use the python class method `count_images_size()` prepared. Type `python3` in the command line to get into the python prompt:
+```
+Python 3.10.12 (main, Jun 11 2023, 05:26:28) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from lab.utils import utils
+>>> utils.count_images_size()
+Total docker images size downloaded:
+42.54GB,  0MB,  13.3kB
+>>> 
+```
+
+Taking the downloaded images in my computer for instance:
+```
+REPOSITORY                TAG       IMAGE ID       CREATED        SIZE
+dockerflamejc/advanipc    v3        f7103e24dce6   3 days ago     6.21GB
+dockerflamejc/advanipc    latest    1f31b8535cc2   3 weeks ago    6.08GB
+dockerflamejc/advanipc    v2        1f31b8535cc2   3 weeks ago    6.08GB
+advanipc/demo             latest    59ffd52622f0   8 weeks ago    7.3GB
+openvino-yolov8           latest    5d9f8f729d2f   2 months ago   11.6GB
+sertek_hero_project       latest    572d6a933ec1   3 months ago   2.89GB
+ov_2023_ubuntu22_pyt311   latest    020d8c9ba799   3 months ago   2.38GB
+hello-world               latest    9c7a54a9a43c   4 months ago   13.3kB
 ```
 
 ## References
