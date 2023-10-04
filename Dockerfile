@@ -378,6 +378,9 @@ COPY resources/highway_car.mp4 .
 WORKDIR /home/openvino/lab
 COPY lab .
 
+WORKDIR /home/openvino/poc
+COPY poc .  
+
 # USER OpenVINO home directory 
 ENV USER_OPENVINO_DIR=/home/openvino
 WORKDIR ${USER_OPENVINO_DIR}
