@@ -1,0 +1,3 @@
+openvino==2023.0.0
+ultralytics==8.0.124
+ipython==8.14.0

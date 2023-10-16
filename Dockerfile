@@ -380,6 +380,7 @@ COPY lab .
 
 WORKDIR /home/openvino/poc
 COPY poc .  
+RUN ${PYTHON_VER} -m pip install -r requirements.txt
 
 # USER OpenVINO home directory 
 ENV USER_OPENVINO_DIR=/home/openvino

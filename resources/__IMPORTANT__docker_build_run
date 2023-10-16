@@ -1,0 +1,7 @@
+# Build (Under the location where Dockerfile is available at the same directory)
+docker build . --build-arg package_url=https://storage.openvinotoolkit.org/repositories/openvino/packages/2023.0/linux/l_openvino_toolkit_ubuntu20_2023.0.0.10926.b4452d56304_x86_64.tgz -t dockerflamejc/advanipc:v3
+
+### For sake of security concern you can also add --no-cache argument
+
+# Run
+docker run --interactive --tty --device /dev/dri:/dev/dri --volume /tmp/.X11-unix/:/tmp/.X11-unix --volume /home/cnai/Downloads/:/mnt --env DISPLAY=$DISPLAY --device /dev/video0:/dev/video0 --rm --hostname=advanipc dockerflamejc/advanipc:v3
