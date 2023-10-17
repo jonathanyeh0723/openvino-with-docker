@@ -4,4 +4,4 @@ docker build . --build-arg package_url=https://storage.openvinotoolkit.org/repos
 ### For sake of security concern you can also add --no-cache argument
 
 # Run
-docker run --interactive --tty --device /dev/dri:/dev/dri --volume /tmp/.X11-unix/:/tmp/.X11-unix --volume /home/cnai/Downloads/:/mnt --env DISPLAY=$DISPLAY --device /dev/video0:/dev/video0 --rm --hostname=advanipc dockerflamejc/advanipc:v3
+docker run --interactive --tty --device /dev/dri:/dev/dri --volume /tmp/.X11-unix/:/tmp/.X11-unix --volume /home/cnai/Downloads/:/mnt --env DISPLAY=$DISPLAY --device /dev/video0:/dev/video0 --rm --hostname advanipc dockerflamejc/advanipc:v3

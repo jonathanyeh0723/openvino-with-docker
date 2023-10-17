@@ -13,6 +13,7 @@ from typing import Tuple, Dict
 from ultralytics.yolo.utils import ops
 from ultralytics.yolo.utils.plotting import colors
 import torch
+import argparse
 
 models_dir = Path('./models')
 
@@ -249,7 +250,7 @@ def image_to_tensor(image:np.ndarray):
     return input_tensor
 
 # Main processing function to run object detection.
-def run_object_detection(source=0, flip=False, use_popup=False, skip_first_frames=0, model=det_model, device=device):
+def run_object_detection(args, source=0, flip=False, use_popup=False, skip_first_frames=0, model=det_model, device=device):
     player = None
     if device != "CPU":
         model.reshape({0: [1, 3, 640, 640]})
@@ -257,7 +258,7 @@ def run_object_detection(source=0, flip=False, use_popup=False, skip_first_frame
     try:
         # Create a video player to play with target fps.
         player = VideoPlayer(
-            source=source, flip=flip, fps=30, skip_first_frames=skip_first_frames
+            source=args.input, flip=flip, fps=30, skip_first_frames=skip_first_frames
         )
         # Start capturing.
         player.start()
@@ -351,4 +352,16 @@ if WEBCAM_INFERENCE:
 else:
     VIDEO_SOURCE = 'https://storage.openvinotoolkit.org/repositories/openvino_notebooks/data/data/video/people.mp4'
 
-run_object_detection(source='/dev/video0', flip=True, use_popup=True, model=det_ov_model, device="AUTO")
+def get_args():
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-i", "--input", required=True, type=str, help="The input file for the inference")
+
+    args = parser.parse_args()
+
+    return args
+
+if __name__ == "__main__":
+    args = get_args()
+    run_object_detection(args, source='/dev/video0', flip=False, use_popup=True, model=det_ov_model, device="AUTO")
+
