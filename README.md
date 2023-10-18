@@ -266,6 +266,24 @@ Starting to perform benchmark performance visualization...
 
 ![object_detection_plot](resources/what_was_i_made_for.png)
 
+- YOLOv8 Implementation
+
+Integrated from [OpenVINO Notebooks](https://github.com/openvinotoolkit/openvino_notebooks/tree/main) repo. For detailed information you could further visit [230-yolov8-optimization](https://github.com/openvinotoolkit/openvino_notebooks/tree/main/notebooks/230-yolov8-optimization).<br>
+
+Docker run commands:
+```
+docker run --interactive --tty --device /dev/dri:/dev/dri --volume /tmp/.X11-unix/:/tmp/.X11-unix --volume /home/cnai/Downloads/:/mnt --env DISPLAY=$DISPLAY --device /dev/video0:/dev/video0 --rm --hostname openvino dockerflamejc/advanipc:latest
+```
+
+To run YOLOv8 real-time inference with webcam:
+```
+cd poc
+python3 object-detection-yolov8.py --input /dev/video0
+```
+
+Below is a sample figure for reference.<br>
+![yolov8_webcam](resources/yolov8_live_demo.png)
+
 If you run inference for some tasks, while showing the results encountering warning message like below:
 ```
 (python3:87): dbind-WARNING **: 07:06:46.828: Couldn't connect to accessibility bus: Failed to connect to socket /run/user/1000/at-spi/bus_1: No such file or directory
