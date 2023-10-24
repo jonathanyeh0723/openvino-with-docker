@@ -382,6 +382,9 @@ WORKDIR /home/openvino/poc
 COPY poc .  
 RUN ${PYTHON_VER} -m pip install -r requirements.txt
 
+WORKDIR /opt/intel/openvino_2023/open_model_zoo/demos/object_detection_demo/python
+COPY yolo_model . 
+
 # USER OpenVINO home directory 
 ENV USER_OPENVINO_DIR=/home/openvino
 WORKDIR ${USER_OPENVINO_DIR}
