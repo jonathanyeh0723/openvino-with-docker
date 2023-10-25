@@ -264,6 +264,14 @@ Starting to perform benchmark performance visualization...
 
 - Object Detection: <br>
 
+```
+cd lab/
+
+./demo_object_detection_video.sh  # video 
+
+./demo_object_detection_camera.sh # webcam
+```
+
 ![object_detection_plot](resources/what_was_i_made_for.png)
 
 - YOLOv8 Implementation
@@ -283,6 +291,29 @@ python3 object-detection-yolov8.py --input /dev/video0
 
 Below is a sample figure for reference.<br>
 ![yolov8_webcam](resources/yolov8_live_demo.png)
+
+### Benchmark Performance Test
+You could also use automation tools [!Benchmark Python Tool](https://docs.openvino.ai/2023.1/openvino_inference_engine_tools_benchmark_tool_README.html) to estimate deep learning inference performance on supported devices, by using command `benchmark_app`.
+
+The Python benchmark_app is automatically installed when you install OpenVINO Developer Tools using PyPI.
+```
+python -m pip install openvino-dev
+```
+
+The benchmark_app includes a lot of device-specific options, but the primary usage is as simple as:
+```
+benchmark_app -m <model> -d <device> 
+```
+
+- Test for YOLOv8
+```
+benchmark_app -m /home/openvino/poc/models/yolov8n_openvino_int8_model/yolov8n_with_preprocess.xml -d AUTO
+```
+
+- Test for YOLOv3
+```
+benchmark_app -m /opt/intel/openvino_2023/open_model_zoo/demos/object_detection_demo/python/yolo-v3-tf/FP16-INT8/yolo-v3-tf.xml -d AUTO
+```
 
 If you run inference for some tasks, while showing the results encountering warning message like below:
 ```
