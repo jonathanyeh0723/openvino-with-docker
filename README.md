@@ -208,6 +208,11 @@ To play more ambitious labs, you'll have to run the container with verbose argum
 docker run -it --device /dev/dri:/dev/dri --volume ~/Downloads:/mnt -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --rm dockerflamejc/advanipc:latest
 ```
 
+In addition, you would need to allow the root user access to the X server with `sudo xhost +` command. Input sudo password, you should be able to see the following from the console, if successful:
+```
+access control disabled, clients can connect from any host
+```
+
 Inside the container, go to the `lab` directory.<br>
 - Classification: `1_classification.py`<br>
 To run classification:
