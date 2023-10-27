@@ -58,15 +58,16 @@ ax.set_ylabel('Throughput (FPS)')
 ax.set_title('Benchmark Performance Test Results')
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
-ax.legend()
 
 if 'CPU' and 'GPU' in devices:
     rects1 = ax.bar(x - width/2, cpu_performance, width, label='CPU')
     rects2 = ax.bar(x + width/2, gpu_performance, width, label='GPU')
     ax.bar_label(rects1, padding=3)
     ax.bar_label(rects2, padding=3)
+    ax.legend(loc='upper left', title='Device')
 else:
     ax.bar(x, cpu_performance, width, label='CPU')
+    ax.legend(loc='upper left', title='Device')
 
 fig.tight_layout()
 plt.show()
