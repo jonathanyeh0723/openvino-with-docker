@@ -298,7 +298,7 @@ Below is a sample figure for reference.<br>
 ![yolov8_webcam](resources/yolov8_live_demo.png)
 
 ### Benchmark Performance Test
-You could also use automation tools [!Benchmark Python Tool](https://docs.openvino.ai/2023.1/openvino_inference_engine_tools_benchmark_tool_README.html) to estimate deep learning inference performance on supported devices, by using command `benchmark_app`.
+You could also use automation tools [Benchmark Python Tool](https://docs.openvino.ai/2023.1/openvino_inference_engine_tools_benchmark_tool_README.html) to estimate deep learning inference performance on supported devices, by using command `benchmark_app`.
 
 The Python benchmark_app is automatically installed when you install OpenVINO Developer Tools using PyPI.
 ```
@@ -319,6 +319,13 @@ benchmark_app -m /home/openvino/poc/models/yolov8n_openvino_int8_model/yolov8n_w
 ```
 benchmark_app -m /opt/intel/openvino_2023/open_model_zoo/demos/object_detection_demo/python/yolo-v3-tf/FP16-INT8/yolo-v3-tf.xml -d AUTO
 ```
+
+- YOLOv3 v.s. YOLOv8 Benchmark Performance
+```
+python3 5_benchmark_yolo_plot.py
+```
+![yolo_benchmark](resources/benchmark_yolo.png)
+
 
 If you run inference for some tasks, while showing the results encountering warning message like below:
 ```
