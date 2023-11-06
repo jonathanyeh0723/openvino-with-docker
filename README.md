@@ -251,7 +251,7 @@ You would need to wait for a couple of minutes for the testing.
 Starting to perform benchmark performance visualization...
 ```
 
-![lab_4-1_result](lab/plot/benchmark_plot_cpu_gpu.png)
+![lab_4-1_result](lab/plot/benchmark_1_cpu_gpu.png)
 
 In addition, in case of integrated graphic card is not successfully activated (this usually due to the use of unverified Linux Kernel version, missing some Docker run command arguments, or in [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) environment not performing post configuration), the plot script also can also handle situation of CPU plugin scenario only.
 
@@ -265,7 +265,7 @@ In such case, You would **not** see the *GPU plugin found* message reflected fro
 Starting to perform benchmark performance visualization...
 ```
 
-![lab_4-2_result](lab/plot/benchmark_plot_cpu.png)
+![lab_4-2_result](lab/plot/benchmark_2_cpu.png)
 
 - Object Detection: <br>
 
