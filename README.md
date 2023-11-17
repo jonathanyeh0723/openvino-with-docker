@@ -292,7 +292,7 @@ To run YOLOv8 inference with a video:
 ```
 cd poc
 python3 object-detection-yolov8.py --input /opt/intel/openvino_2023/open_model_zoo/demos/object_detection_demo/python/highway_car.mp4
-``
+```
 ![yolov8_video](resources/yolov8_video_demo.png)
 
 To run YOLOv8 real-time inference with webcam:
