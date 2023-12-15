@@ -6,9 +6,16 @@ import numpy as np
 # Load a model
 model = YOLO('yolov8n.pt') # pretrained YOLOv8n model
 
+# Export the model
+###model.export(format='openvino')  # creates 'yolov8n_openvino_model/'
+
+# Load the exported OpenVINO model
+###ov_model = YOLO('yolov8n_openvino_model/')
+
 # Run single inference for a image
 frame = cv2.imread('neymar.jpeg')
 results = model(frame)
+###results = ov_model(frame)
 
 # Process results list
 for result in results:
